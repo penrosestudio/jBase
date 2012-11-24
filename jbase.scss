@@ -218,7 +218,9 @@ body {
     min-width: 960px;
 }
 
-
+.row {
+    overflow: hidden;
+}
 
 /* -----------------
    Columns and boxes
@@ -235,115 +237,16 @@ body {
 
     // Boxes within boxes
     // e.g. .box .grid3col.box { width: 160px; }
-    .box .grid#{$i}col.box { width: ($i - 1)*80; }
+    .box .grid#{$i}col.box { width: ($i - 1)*80px; }
+
+    // Rows of boxes
+    // (uses first/last-child pseudo elements to push rows of boxes within boxes back onto the grid)
+    .row .grid#{$i}col.box { width: 20px + ($i - 1)*80; }
+
+    .row > .grid#{$i}col.box:first-child, .row > .grid#{$i}col.box:last-child {
+        width: ($i - 1)*80px;
+    }
 }
-
-
-/*          Rows of Boxes 
-            (uses first/last-child pseudo elements to push rows of boxes within boxes back onto the grid)
-
-................................................................................................ */
-
-.row {
-    overflow: hidden;
-}
-
-.row .grid1col.box {
-    width: 20px;
-}
-
-.row .grid2col.box {
-    width: 100px;
-}
-
-.row .grid3col.box {
-    width: 180px
-}
-
-.row .grid4col.box {
-    width: 260px; 
-}
-
-.row .grid5col.box {
-    width: 340px
-}
-
-.row .grid6col.box {
-    width: 420px;
-}
-
-.row .grid7col.box {
-    width: 500px
-}
-
-.row .grid8col.box {
-    width: 580px
-}
-
-.row .grid9col.box {
-    width: 660px;
-}
-
-.row .grid10col.box {
-    width: 740px
-}
-
-.row .grid11col.box {
-    width: 820px
-}
-
-.row .grid12col.box {
-    width: 900px;
-}
-
-.row > .grid1col.box:first-child, .row > .grid1col.box:last-child {
-    width: 0px;
-}
-
-.row > .box.grid2col:first-child, .row > .grid2col.box:last-child {
-    width: 80px;
-}
-
-.row > .grid3col.box:first-child, .row > .grid3col.box:last-child {
-    width: 160px;
-}
-
-.row > .grid4col.box:first-child, .row > .grid4col.box:last-child {
-    width: 240px;
-}
-
-.row > .grid5col.box:first-child, .row > .grid5col.box:last-child {
-    width: 320px;
-}
-
-.row > .grid6col.box:first-child, .row > .grid6col.box:last-child {
-    width: 400px;
-}
-
-.row > .grid7col.box:first-child, .row > .grid7col.box:last-child {
-    width: 480px;
-}
-
-.row > .grid8col.box:first-child, .row > .grid8col.box:last-child {
-    width: 560px;
-}
-
-.row > .grid9col.box:first-child, .row > .grid9col.box:last-child {
-    width: 640px;
-}
-
-.row > .grid10col.box:first-child, .row > .grid10col.box:last-child {
-    width: 720px;
-}
-
-.row > .grid11col.box:first-child, .row > .grid11col.box:last-child {
-    width: 800px;
-}
-
-.row > .grid12col.box:first-child, .row > .grid12col.box:last-child {
-    width: 880px;
-}
-
 
 /*          Modifiers
 
@@ -737,41 +640,14 @@ h1.fixed, h2.fixed, h3.fixed, h4.fixed, h5.fixed, h6.fixed{
 
 
 
-/*          Div Modifiers 
+/* Div Modifiers 
+*/
 
-................................................................................................ */
-
-.push1 {
-    padding-top: 6px;
+@for $i from 1 through 4 {
+    .push#{$i} { padding-top: 6px*$i; }
+    .pull#{$i} { margin-top: -6px*$i; }
 }
 
-.push2 {
-    padding-top: 12px;
-}
-
-.push3 {
-    padding-top: 18px;
-}
-
-.push4 {
-    padding-top: 24px;
-}
-
-.pull1 {
-    margin-top: -6px;
-}
-
-.pull2 {
-    margin-top: -12px;
-}
-
-.pull3 {
-    margin-top: -18px;
-}
-
-.pull4 {
-    margin-top: -24px;
-}
 
 
 /* NEED to find a better way of doing this with small/large p's etc  - JB */
